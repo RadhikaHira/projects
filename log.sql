@@ -148,18 +148,21 @@ WHERE name IN ('Berthold', 'James','Doris');
 --953679 | Doris | (066) 555-9701 | 7214083635 | M51FA04
 
 --Ernest called: Berthold who doesnt have a passport number
+--Since Raymond said that the theif asked the accomplice
+-- to purchase a ticket, that means Berthold was not going
+--  becouse he has no passport number
 
 --checking passport for those 3 
 --and make sure origin airport is fiftyville (8)
 SELECT * FROM passengers
 JOIN flights ON passengers.flight_id = flights.id
-WHERE passport_number IN ('','2438825627','7214083635') AND origin_airport_id = '8';
+WHERE passport_number IN ('?','2438825627','7214083635') AND origin_airport_id = '8';
 
 --flight_id | passport_number | seat | id | origin_airport_id | destination_airport_id | year | month | day | hour | minute
 --10 | 2438825627 | 7C | 10 | 8 | 4 | 2020 | 7 | 30 | 13 | 55
 --36 | 7214083635 | 2A | 36 | 8 | 4 | 2020 | 7 | 29 | 8 | 20
 
---Seems like Doris is the accomplice meaning Bobby is the theif 
+--Seems like Berthold is the accomplice meaning Ernest is the theif 
 --now to find where the theif went 
 
 SELECT * FROM flights
