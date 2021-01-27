@@ -209,6 +209,8 @@ def quote():
 def register():
     """Register user"""
     
+    username=request.form.get("username")
+    
     # Forget any user_id
     session.clear()
 
@@ -227,17 +229,18 @@ def register():
             return apology("Passwords do not match", 400)
 
         # Query database for username if already exists
-        elif db.execute("SELECT * FROM users WHERE username = :username", username==request.form.get("username")):
+        elif db.execute("SELECT * FROM users WHERE username = :username", username):
+            username == request.form.get("username")
             return apology("Username already taken", 400)
 
         # Insert user and hash of the password into the table
-        db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)", username=request.form.get("username"), hash=generate_password_hash(request.form.get("password")))
+        db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)", username, hash=generate_password_hash(request.form.get("password")))
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
+        db.execute("SELECT * FROM users WHERE username = :username", username)
 
         # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = username[0]["id"]
 
         # Redirect user to home page
         return redirect("/")
