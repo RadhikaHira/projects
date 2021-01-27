@@ -227,7 +227,7 @@ def register():
             return apology("Passwords do not match", 400)
 
         # Query database for username if already exists
-        elif db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username")):
+        elif db.execute("SELECT * FROM users WHERE username = :username", username==request.form.get("username")):
             return apology("Username already taken", 400)
 
         # Insert user and hash of the password into the table
