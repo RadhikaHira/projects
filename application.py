@@ -228,7 +228,7 @@ def register():
 
         # Query database for username if already exists
         elif db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username")):
-            return apology("Username already taken", 200)
+            return apology("Username already taken", 400)
 
         # Insert user and hash of the password into the table
         db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)", username=request.form.get("username"), hash=generate_password_hash(request.form.get("password")))
