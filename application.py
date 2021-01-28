@@ -216,7 +216,7 @@ def register():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("No username", 200)
+            return apology("No username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
@@ -233,7 +233,7 @@ def register():
 
         # Insert user and hash of the password into the table
         db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)", username=request.form.get("username"),
-        hash=generate_password_hash(request.form.get("password")))
+        hash=generate_password_hash(request.form.get("password")), 200)
 
         # Query database for username
         rows=db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
