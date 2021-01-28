@@ -161,7 +161,7 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 200)
+            return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -228,8 +228,8 @@ def register():
 
         # Query database for username if already exists
         user = db.execute("SELECT * FROM users WHERE username = :username",
-            username=request.form.get("username"):
-            return apology("Username already taken", 200)
+            username=request.form.get("username")):
+            return apology("Username already taken", 400)
 
         # Insert user and hash of the password into the table
         db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)",
