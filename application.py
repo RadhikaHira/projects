@@ -236,10 +236,10 @@ def register():
         hash=generate_password_hash(request.form.get("password")))
 
         # Query database for username
-        db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
+        rows=db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
 
         # Remember which user has logged in
-        session["user_id"] = username[0]["id"]
+        session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
         return redirect("/")
