@@ -216,27 +216,28 @@ def register():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("No username", 400)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("Provide password", 400)
+            return apology("must provide password", 400)
 
         # Ensure confirm password is correct
         elif request.form.get("password") != request.form.get("confirm-password"):
-            return apology("Passwords do not match", 400)
+            return apology("The passwords don't match", 400)
 
         # Query database for username if already exists
-        if db.execute("SELECT * FROM users WHERE username = :username",
-            username=request.form.get("username")):
-            return apology("Username already taken", 200)
+        elif db.execute("SELECT * FROM users WHERE username = :username",
+            username)==request.form.get("username"):
+            return apology("Username already taken", 400)
 
         # Insert user and hash of the password into the table
-        db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)", username=request.form.get("username"),
-        hash=generate_password_hash(request.form.get("password")), 200)
+        db.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)",
+            username=request.form.get("username"), hash=generate_password_hash(request.form.get("password")))
 
         # Query database for username
-        rows=db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = :username",
+            username=request.form.get("username"))
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
