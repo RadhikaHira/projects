@@ -41,6 +41,22 @@ db = SQL("sqlite:///finance.db")
 if not os.environ.get("API_KEY"):
     raise RuntimeError("API_KEY not set")
 
+#add cash if you dont have money
+@app.route("/add_cash", methods=["GET", "POST"])
+@login_required
+def add_cash():
+    if request.method == "POST":
+        db.execute("""
+                UPDATE users
+                SET cash = cash + :amount
+                WHERE id=:user_id
+        """, amount=request.form.get("cash"), user_id=session["user_id"])
+        flash("Cash Added!")
+        return redirect("/")
+
+    else:
+        return render_template("add_cash.html")
+
 #define
 def is_given(field):
     if not request.form.get(field):
@@ -146,7 +162,8 @@ def history():
     for i in range(len(transactions)):
         transactions[i]["price"] = usd(transactions[i]["price"])
 
-    return render_template("history.html", transactions=transactions
+    return render_template("history.html", transactions=transactions)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -324,21 +341,6 @@ def sell():
         """,user_id=session["user_id"])
         return render_template("sell.html", symbols= [row["symbol"] for row in rows])
 
-
-@app.route("/add_cash", methods=["GET", "POST"])
-@login_required
-def add_cash():
-    if request.method == "POST":
-        db.execute("""
-                UPDATE users
-                SET cash = cash + :amount
-                WHERE id=:user_id
-        """, amount=request.form.get("cash"), user_id=session["user_id"])
-        flash("Cash Added!")
-        return redirect("/")
-
-    else:
-        return render_template("add_cash.html")
 
 def errorhandler(e):
     """Handle error"""
