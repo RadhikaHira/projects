@@ -265,6 +265,7 @@ def register():
             return apology("Registration Error", 400)
 
         session["user_id"] = primary
+        return redirect("/")
 
     else:
         return render_template("register.html")
