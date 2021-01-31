@@ -7,12 +7,8 @@
 {% block main %}
     <form action="/quote" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text">
+            <input autocomplete="off" placeholder="Quote" class="form-control" autofocus name="symbol" type="text">
         </div>
-        <button id="submit" class="btn btn-primary" type="submit">Quote</button>
-    </form><br><br>
-
-    {% if stock %}
-        <h4>A stock of {{ stock['name'] }} {{ stock['symbol'] }} is worth {{ stock['price'] }} $</h4>
-    {% endif %}
+        <button class="btn btn-primary" type="submit">Quote</button>
+    </form>
 {% endblock %}

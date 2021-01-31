@@ -7,15 +7,17 @@
 {% block main %}
     <form action="/sell" method="post">
         <div class="form-group">
-            <select id="stock" name="symbol">
-            {% for key, value in stocks.items() %}
-                <option value={{ key }}> {{ key }}, owned {{ value }} </option>
-            {% endfor %}
+            <select class="form-control" name="symbol">
+                <option disabled selected value="">Symbol</option>
+                {% for symbol in symbols %}
+                    <option value= "{{symbol}}">{{symbol}}</option>
+                {% endfor %}
             </select>
         </div>
+
         <div class="form-group">
-            <input min="1" autocomplete="off" autofocus class="form-control" name="amount" placeholder="Amount" type="number">
+            <input autocomplete="off" placeholder="Shares" class="form-control" min="1" name="shares" type="number">
         </div>
-        <button id="submit" class="btn btn-primary" type="submit">Sell</button>
+        <button class="btn btn-primary" type="submit">Sell</button>
     </form>
 {% endblock %}
