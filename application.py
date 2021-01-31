@@ -60,7 +60,7 @@ def add_cash():
 #define
 def is_given(field):
     if not request.form.get(field):
-        return apology(f"must provide {field}", 403)
+        return apology(f"must provide {field}", 400)
 
 
 @app.route("/")
@@ -259,10 +259,10 @@ def register():
 
         # if username already eists
         except:
-            return apology("Username already exists", 403)
+            return apology("Username already exists", 400)
 
         if primary is None:
-            return apology("Registration Error", 403)
+            return apology("Registration Error", 400)
 
         session["user_id"] = primary
 
