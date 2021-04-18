@@ -1,0 +1,77 @@
+/* Styling webpage*/
+body {
+  background-color: lightblue;
+}
+
+/* For about page*/
+article{
+    text-align: center;
+}
+/* For link page*/
+#site:hover{
+
+        color: #ff0000;
+        text-decoration: underline;
+}
+/* For search page*/
+input[type=search]{
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+    width: 130px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+input[type=search]:focus{
+    width: 100%;
+}
+form,input{
+
+    margin-left: auto;
+    margin-right: auto;
+}
+/* For navigation part in every page*/
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+li{
+    float: left;
+}
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover{
+    background-color: black;
+}
+/* Every header should be int he center*/
+header{
+    text-align: center;
+}
+/* For index page*/
+.index{
+    text-align: center;
+}
+img{
+    width: 75%;
+    height: 75%;
+    padding: 0px;
+    border: 3px solid red;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+div.today{
+    justify-content: center;
+    align-items: center;
+}
