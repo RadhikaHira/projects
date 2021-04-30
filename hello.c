@@ -1,4 +1,4 @@
-style#include <stdio.h>
+#include <stdio.h>
 #include <cs50.h>
 
 //main code
